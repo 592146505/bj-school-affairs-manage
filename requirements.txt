@@ -1,0 +1,9 @@
+flask
+flask-login
+flask-cors
+flask-sqlalchemy
+flask-migrate
+werkzeug
+pymysql
+WTForms
+WTForms-JSON
