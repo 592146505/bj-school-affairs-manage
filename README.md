@@ -7,13 +7,7 @@ source venv/bin/activate
 ```shell
 pip3 install -r requirements.txt
 ```
-3. 执行数据库初始化
+3. 启动
 ```shell
-flask db init
-flask db migrate
-flask db upgrade
-```
-4. 启动
-```shell
-python app.py
+python3 app.py
 ```
