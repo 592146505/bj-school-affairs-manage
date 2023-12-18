@@ -48,7 +48,7 @@ def department_page():
      }
     return jsonify(Result.ok(data=result))
 
-# 新增员工
+# 新增部门
 class AddDepartmentCmd(BaseReq):
     name = StringField(validators=[DataRequired(message='部门名称为空'),length(message='部门名称允许[1-20]个字符',min=1, max=20)])
     description = StringField(default='',validators=[length(message='描述最多[250]个字符', max=250)])

@@ -1,10 +1,8 @@
 # -*- coding: UTF-8 -*-
-from datetime import datetime
-
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 from flask_sqlalchemy.query import Query as BaseQuery
 
-from sqlalchemy import inspect, Column, Integer, SmallInteger, orm,SelectBase
+from sqlalchemy import inspect, Column, DateTime, SmallInteger, orm, func
 from contextlib import contextmanager
 
 from app.libs.error_code import NotFoundException
@@ -46,30 +44,12 @@ db = SQLAlchemy(query_class=Query)
 
 class BaseModel(db.Model):
     __abstract__ = True
-    create_time = Column(Integer)
-    update_time = Column(Integer)
+    create_time = Column(DateTime, default=func.now(),)
+    update_time = Column(DateTime, default=func.now(), onupdate=func.now())
     deleted = Column(SmallInteger, default=1)
-
-    def __init__(self):
-        self.create_time = int(datetime.now().timestamp())
-        self.update_time = int(datetime.now().timestamp())
 
     def __getitem__(self, item):
         return getattr(self, item)
-
-    @property
-    def create_datetime(self):
-        if self.create_time:
-            return datetime.fromtimestamp(self.create_time)
-        else:
-            return None
-    
-    @property
-    def update_datetime(self):
-        if self.update_time:
-            return datetime.fromtimestamp(self.update_time)
-        else:
-            return None
 
     def set_attrs(self, attrs_dict):
         for key, value in attrs_dict.items():

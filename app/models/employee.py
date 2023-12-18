@@ -4,7 +4,7 @@ from sqlalchemy import Column,Integer,String,Index,orm,literal,or_
 from app.models.base import BaseModel,db
 from app.libs.error_code import ConflictException
 
-# 员工
+# 职工
 class Employee(BaseModel):
     __tablename__ = 'employee'
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -22,15 +22,20 @@ class Employee(BaseModel):
     @staticmethod
     def create(name, alias, department_id):
         '''
-        新增员工
+        新增职工
         '''
+        id = None
         with db.auto_commit():
             employee = Employee()
             employee.name = name
             employee.alias = alias
             employee.department_id = department_id
+
             db.session.add(employee)
-            return employee.id
+            db.session.flush()
+            
+            id = employee.id
+        return id
 
     @staticmethod
     def verifyAlias(alias):

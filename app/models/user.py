@@ -33,13 +33,18 @@ class User(UserMixin, BaseModel):
         '''
         注册用户
         '''
+        id = None
         with db.auto_commit():
             user = User()
             user.nickname = nickname
             user.username = username
             user.password = password
+
             db.session.add(user)
-            return user.id
+            db.session.flush()
+            
+            id = user.id
+        return id
 
     @staticmethod
     def verify(username, password):

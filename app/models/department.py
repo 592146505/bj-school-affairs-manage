@@ -15,15 +15,20 @@ class Department(BaseModel):
     @staticmethod
     def create(name, description):
         '''
-        新增员工
+        新增部门
         '''
+        id = None
         with db.auto_commit():
             department = Department()
             department.name = name
             department.description = description
-            db.session.add(department)
-            return department.id
 
+            db.session.add(department)
+            db.session.flush()
+            
+            id = department.id
+        return id
+    
     @staticmethod
     def verifyName(name):
         '''

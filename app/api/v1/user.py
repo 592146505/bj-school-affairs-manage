@@ -30,7 +30,7 @@ class AddUserCmd(BaseReq):
     nickname = StringField(validators=[DataRequired(message='昵称为空'),length(message='昵称允许[1-10]个字符',min=1, max=10)])
 
 @api.route('/', methods=['POST'])
-@login_required
+# @login_required
 def add():
     cmd = AddUserCmd().init_and_validate()
     # 查询是否存在
