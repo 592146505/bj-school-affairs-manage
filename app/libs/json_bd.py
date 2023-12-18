@@ -2,9 +2,9 @@
 from wtforms import Form
 import wtforms_json
 from flask import request
-from common.error_code import ParameterException
+from app.libs.error_code import ParameterException
 
-class BaseJsonReq(Form):
+class BaseReq(Form):
     @classmethod
     def init_and_validate(cls):
         def form_or_json():
@@ -22,7 +22,7 @@ class BaseJsonReq(Form):
         if not valid:
             '''
             得到的错误是这种形式的，为了只显示一条字符，决定随机取第一个
-            {'username': ['用户名允许[5-20]个字符'], 'nikename': ['昵称为空']}
+            {'username': ['用户名允许[5-20]个字符'], 'nickname': ['昵称为空']}
             '''
             raise ParameterException(msg=next(iter(form.errors.values()), None)[0])
         return form

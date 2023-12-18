@@ -1,4 +1,4 @@
-from common.error import APIException
+from app.libs.error import APIException
 
 class ParameterException(APIException):
     code = 400

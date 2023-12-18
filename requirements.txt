@@ -2,7 +2,7 @@ flask
 flask-login
 flask-cors
 flask-sqlalchemy
-flask-migrate
+# flask-migrate
 werkzeug
 pymysql
 WTForms
